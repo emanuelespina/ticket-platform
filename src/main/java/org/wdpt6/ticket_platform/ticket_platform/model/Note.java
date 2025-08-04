@@ -34,6 +34,12 @@ public class Note {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    public Note (){
+
+        setNoteData(LocalDateTime.now()); 
+
+    }
+
     public Integer getId() {
         return id;
     }

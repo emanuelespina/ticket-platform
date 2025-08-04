@@ -21,7 +21,7 @@
             </div>
 
             <div class="d-flex justify-content-center p-2">
-                <a class="btn btn-primary" th:href="@{/tickets}">
+                <a class="btn btn-primary" th:href="@{/operators/{id} (id = ${ticket.user.id})}">
                     Torna indietro
                 </a>
             </div>
@@ -52,6 +52,34 @@
             </div>
         </div>
 
+        <!-- creazione nuova nota -->
+
+        <form th:action="@{/operators/answer/{id} (id = ${ticket.id})}" method="post">
+            <div class="card my-3">
+                <div class="card-header">
+                    Aggiungi una nuova nota
+                </div>
+                <div class="card-body">
+                    
+                    <h5 class="card-title">Testo della nota</h5>
+
+                    <div class="form-floating my-3">
+
+                        <textarea class="form-control" placeholder="Leave a comment here" style="height: 150px" th:field="${newNote.text}"></textarea>
+                        
+                    </div>
+
+                    <div class="d-flex justify-content-evenly">
+
+                        <button type="submit" class="btn btn-primary">Crea</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
         <div class="card mt-3" th:if="${notes.size() > 0}">
             <div class="card-header">
                 nota numero in data
@@ -61,12 +89,6 @@
                     <p>risposta</p>
                 </figure>
             </div>
-        </div>
-
-         <div class="text-center my-4" th:unless="${notes.size() > 0}">
-
-            <h3>Non ci sono note aspetta la risposta di un nostro operatore</h3>
-      
         </div>
 
     </main>

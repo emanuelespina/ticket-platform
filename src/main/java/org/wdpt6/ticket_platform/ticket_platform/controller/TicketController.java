@@ -61,9 +61,13 @@ public class TicketController {
     }
 
     @GetMapping("/{id}")
-    public String show(Model model, @PathVariable Integer id) {    
+    public String show(Model model, @PathVariable Integer id) { 
         
-        model.addAttribute("ticket", ticketRepository.findById(id).get());
+        Ticket ticket = ticketRepository.findById(id).get();
+        
+        model.addAttribute("ticket", ticket);
+
+        model.addAttribute("notes", noteRepository.findByTicket(ticket));
  
         return "tickets/show";
     }
