@@ -1,0 +1,24 @@
+<th:block th:fragment="navbar">
+
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/tickets}">Ticket Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="user-details text-body-secondary" sec:authorize="isAuthenticated()">
+                Logged user: <span sec:authentication="name" class="me-3"></span>
+                Roles: <span sec:authentication="principal.authorities" class="me-3"></span>
+                <a th:href="@{/logout}" class="btn btn-primary">Logout</a>
+            </div>
+            <div class="guest-details" sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}" class="btn btn-primary">Login</a>
+            </div>
+
+        </div>
+    </nav>
+
+</th:block>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head :: head('Lista tickets')}" />
+
+<body>
+
+    <header>
+        <nav th:replace="~{fragments/navbar :: navbar}" />
+    </header>
+
+    <main class="container mt-3 p-0">
+
+        <section class="d-flex justify-content-between">
+
+            <!-- titolo pagina -->
+
+            <div class="title d-flex align-items-center">
+
+                <h1 class="fw-bold">Lista dei ticket</h1>
+
+            </div>
+
+            <!-- barra di ricerca del ticket -->
+
+            <div class="d-flex justify-content-center p-2">
+                <form method="GET" th:action="@{/tickets}" class="d-flex">
+                    <input type="search" name="keyword" placeholder="Cerca" class="form-control me-1">
+                    <button type="submit" class="btn btn-outline-primary">Cerca</button>
+                </form>
+            </div>
+
+        </section>
+
+        <!-- bottone per creazione nuovo ticket -->
+
+        <section class="d-flex justify-content-center m-3">
+
+            <a class="btn btn-primary" th:href="@{/tickets/create}">
+                Nuovo Ticket
+            </a>
+
+        </section>
+
+        <section class="ticket-list">
+
+            <table class="table" th:if="${tickets.size() > 0}">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Stato</th>
+                        <th scope="col">Azioni</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="ticket : ${tickets}" th:object="${ticket}">
+                        <th scope="col">[[*{id}]]</th>
+                        <th scope="col">[[*{name}]]</th>
+                        <th scope="col" >
+                            <div class="d-flex">
+                            <div th:each="category : *{categories}">
+                                <span class="badge rounded-pill text-bg-dark m-1">[[${category.name}]]</span>
+                            </div>
+                            </div>
+                        </th>
+                        <th scope="col">[[*{status}]]</th>
+                        <th scope="col">
+                            <a th:href="@{|/tickets/*{id}|}" class="btn btn-primary btn-sm">Show</a>
+                            <a th:href="@{|/tickets/edit/*{id}|}" class="btn btn-success btn-sm">Edit</a>
+
+                            <button type="button" class="d-inline btn btn-warning btn-sm" data-bs-toggle="modal"
+                                th:data-bs-target="'#delete-modal-' + *{id}">
+                                Delete
+                            </button>
+
+                            <div class="modal fade" th:id="'delete-modal-' + *{id}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-name fs-5" id="staticBackdropLabel">Cancellazione ticket:
+                                                [[*{name}]]</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                                Sei sicuro di voler cancellare il ticket con [[*{id}]]?
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Chiudi</button>
+                                            <form th:action="@{|/tickets/delete/*{id}|}" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-danger btn">Cancella</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </th>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <!-- <h3 class="text-center" th:unless="${tickets.size() > 0}">
+
+                Non ci sono ticket, creane uno nuovo
+
+            </h3> -->
+
+
+        </section>
+
+        <footer th:replace="~{fragments/footer :: footer}" />
+
+        <script th:replace="~{fragments/footer :: scripts}" />
+
+</body>
+
+</html>
