@@ -52,21 +52,31 @@
             </div>
         </div>
 
-        <div class="card mt-3" th:if="${notes.size() > 0}">
-            <div class="card-header">
-                nota numero in data
+        <div class="card mt-3" th:if="${notes.size() > 0}" th:each="note : ${notes}">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+
+                    nota con id: [[${note.id}]]
+
+                </div>
+                <div>
+
+                    creata in data: [[${note.noteData}]]
+
+                </div>
+
             </div>
             <div class="card-body">
                 <figure>
-                    <p>risposta</p>
+                    <p>[[${note.text}]]</p>
                 </figure>
             </div>
         </div>
 
-         <div class="text-center my-4" th:unless="${notes.size() > 0}">
+        <div class="text-center my-4" th:unless="${notes.size() > 0}">
 
             <h3>Non ci sono note aspetta la risposta di un nostro operatore</h3>
-      
+
         </div>
 
     </main>

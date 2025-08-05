@@ -60,11 +60,11 @@
                     <tr th:each="ticket : ${tickets}" th:object="${ticket}">
                         <th scope="col">[[*{id}]]</th>
                         <th scope="col">[[*{name}]]</th>
-                        <th scope="col" >
+                        <th scope="col">
                             <div class="d-flex">
-                            <div th:each="category : *{categories}">
-                                <span class="badge rounded-pill text-bg-dark m-1">[[${category.name}]]</span>
-                            </div>
+                                <div th:each="category : *{categories}">
+                                    <span class="badge rounded-pill text-bg-dark m-1">[[${category.name}]]</span>
+                                </div>
                             </div>
                         </th>
                         <th scope="col">[[*{status}]]</th>
@@ -117,12 +117,13 @@
 
             </h3>
 
-
         </section>
 
-        <footer th:replace="~{fragments/footer :: footer}" />
+    </main>
 
-        <script th:replace="~{fragments/footer :: scripts}" />
+    <footer th:replace="~{fragments/footer :: footer}" />
+
+    <script th:replace="~{fragments/footer :: scripts}" />
 
 </body>
 

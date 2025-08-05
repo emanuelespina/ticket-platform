@@ -48,13 +48,22 @@
             </div>
             <div class="card-footer text-body-secondary d-flex justify-content-evenly align-items-center">
                 <p class="d-flex justify-content-center align-items-center m-0">[[*{user.username}]]</p>
-                <p class="d-flex justify-content-center align-items-center m-0">[[*{status}]]</p>
+
+                <form action="" method="post" class="d-flex">                
+
+                <p class="d-flex justify-content-center align-items-center my-0 mx-2">[[*{status}]]</p>
+
+                <button type="submit" class="btn btn-primary mx-2">Cambia stato</button>
+
+                </form>   
+
             </div>
         </div>
 
         <!-- creazione nuova nota -->
 
-        <form th:action="@{/operators/answer/{id} (id = ${ticket.id})}" method="post">
+        <form th:action="@{/operators/answer/{id}(id=${ticket.id})}" method="post">
+
             <div class="card my-3">
                 <div class="card-header">
                     Aggiungi una nuova nota
@@ -80,13 +89,23 @@
 
         </form>
 
-        <div class="card mt-3" th:if="${notes.size() > 0}">
-            <div class="card-header">
-                nota numero in data
+        <div class="card mt-3" th:if="${notes.size() > 0}" th:each="note : ${notes}">
+            <div class="card-header d-flex justify-content-between">
+                <div>
+                    
+                    nota con id: [[${note.id}]] 
+
+                </div>
+                <div>
+
+                    creata in data: [[${note.noteData}]]
+
+                </div>
+                
             </div>
             <div class="card-body">
                 <figure>
-                    <p>risposta</p>
+                    <p>[[${note.text}]]</p>
                 </figure>
             </div>
         </div>

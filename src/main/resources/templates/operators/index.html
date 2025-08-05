@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace="~{fragments/head :: head('Lista tickets')}" />
+<head th:replace="~{fragments/head :: head('Lista tickets operatore')}" />
 
 <body>
 
@@ -24,22 +24,22 @@
             <!-- barra di ricerca del ticket -->
 
             <div class="d-flex justify-content-center p-2">
-                <form method="GET" th:action="@{/tickets}" class="d-flex">
+                <form method="GET"  class="d-flex">
                     <input type="search" name="keyword" placeholder="Cerca" class="form-control me-1">
                     <button type="submit" class="btn btn-outline-primary">Cerca</button>
                 </form>
             </div>
 
-        </section>        
+        </section>
 
         <section class="d-flex justify-content-center m-3">
 
-            <div class="d-flex" >
+            <div class="d-flex">
 
                 <label for="user" class="form-label mx-2">Seleziona il tuo stato</label>
-                <select  class="form-select mx-2" required>
+                <select class="form-select mx-2" required>
                     <option value="">lo statooooooooooooooooooo</option>
-                    <option >
+                    <option>
                     </option>
                 </select>
 
@@ -89,12 +89,14 @@
 
             </h3>
 
+    </main>
 
-        </section>
 
-        <footer th:replace="~{fragments/footer :: footer}" />
+    </section>
 
-        <script th:replace="~{fragments/footer :: scripts}" />
+    <footer th:replace="~{fragments/footer :: footer}" />
+
+    <script th:replace="~{fragments/footer :: scripts}" />
 
 </body>
 
