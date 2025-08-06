@@ -5,24 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wdpt6.ticket_platform.ticket_platform.model.Note;
 import org.wdpt6.ticket_platform.ticket_platform.model.Ticket;
-import org.wdpt6.ticket_platform.ticket_platform.model.User;
 import org.wdpt6.ticket_platform.ticket_platform.model.Ticket.TicketStatus;
+import org.wdpt6.ticket_platform.ticket_platform.model.User;
+
 import org.wdpt6.ticket_platform.ticket_platform.repository.NoteRepository;
 import org.wdpt6.ticket_platform.ticket_platform.repository.TicketRepository;
 import org.wdpt6.ticket_platform.ticket_platform.repository.UserRepository;
 
-import jakarta.validation.Valid;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -119,15 +119,15 @@ public class OperatorController {
     }
 
     @PostMapping("/changer/{id}")
-    public String saveChange(@ModelAttribute ("formStatus") String formStatus, Model model, @PathVariable Integer id) {
+    public String saveChange(@RequestParam String status, Model model, @PathVariable Integer id) {
 
         Ticket ticket = ticketRepository.findById(id).get();     
 
-        ticket.setStatus(Ticket.TicketStatus.valueOf(formStatus));  
+        ticket.setStatus(TicketStatus.valueOf(status));  
         
         ticketRepository.save(ticket);
 
-        return "redirect:/operators/" + ticket.getId();
+        return "redirect:/operators/changer/" + ticket.getId();
     }
 
 
