@@ -53,7 +53,7 @@
                     <label for="user" class="form-label">Operatore</label>
                     <select th:field="*{user.id}" class="form-select" required>
                         <option value="">Seleziona un operatore libero</option>
-                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">
+                        <option th:each="user : ${users}" th:if="${user.roles.equals(OPERATOR)}" th:value="${user.id}" th:text="${user.username}">
                         </option>
                     </select>
 

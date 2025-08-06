@@ -72,7 +72,14 @@
                                 </div>
                             </div>
                         </th>
-                        <th scope="col">[[*{status}]]</th>
+                        <th scope="col" class="d-flex">
+                            <div class="mx-2">
+                             <p>[[*{status}]]</p>
+                            </div>
+                            <div class="mx-2">
+                                <a th:href="@{|/operators/changer/*{id}|}" class="btn btn-primary btn-sm">Cambia</a>
+                            </div>
+                        </th>
                         <th scope="col">
 
                             <a th:href="@{|/operators/answer/*{id}|}" class="btn btn-primary btn-sm">Rispondi</a>
