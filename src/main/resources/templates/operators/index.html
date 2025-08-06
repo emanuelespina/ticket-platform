@@ -32,18 +32,11 @@
 
         </section>
 
-        <section class="d-flex justify-content-center m-3">
+         <section class="d-flex justify-content-center m-3">
 
-            <div class="d-flex">
-
-                <label for="user" class="form-label mx-2">Seleziona il tuo stato</label>
-                <select class="form-select mx-2" required>
-                    <option value="">lo statooooooooooooooooooo</option>
-                    <option>
-                    </option>
-                </select>
-
-            </div>
+            <a class="btn btn-primary" th:href="@{/operators/profile/{id} (id=${user.id})}">
+                Visualizza profilo
+            </a>
 
         </section>
 
