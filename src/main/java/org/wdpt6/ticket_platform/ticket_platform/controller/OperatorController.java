@@ -15,6 +15,7 @@ import org.wdpt6.ticket_platform.ticket_platform.model.Ticket.TicketStatus;
 import org.wdpt6.ticket_platform.ticket_platform.model.User;
 
 import org.wdpt6.ticket_platform.ticket_platform.repository.NoteRepository;
+import org.wdpt6.ticket_platform.ticket_platform.repository.RoleRepository;
 import org.wdpt6.ticket_platform.ticket_platform.repository.TicketRepository;
 import org.wdpt6.ticket_platform.ticket_platform.repository.UserRepository;
 
@@ -40,6 +41,9 @@ public class OperatorController {
 
     @Autowired
     private NoteRepository noteRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping("/{id}")
     public String index(Model model, @PathVariable Integer id, @RequestParam(name = "keyword", required = false) String keyword) {
@@ -136,7 +140,9 @@ public class OperatorController {
     @GetMapping("/profile/{id}")
     public String getMethodName(@PathVariable Integer id, Model model) {
       
-        model.addAttribute("user", userRepository.findById(id).get());     
+        model.addAttribute("user", userRepository.findById(id).get());  
+        
+        model.addAttribute("role", roleRepository.findAll());
 
         return "operators/profile";
     }
